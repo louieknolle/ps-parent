@@ -17,7 +17,7 @@ const WeatherPage = () => {
       </Box>
     )
   } else if (error) {
-    return <p>Error fetching weather: {error.message}</p>
+    return <h1 className="pb-2 text-4xl font-bold text-gray-50">Error fetching weather. Please try again.</h1>
   }
 
   // Extract and convert temperature from Kelvin to Fahrenheit
