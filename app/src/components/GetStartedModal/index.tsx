@@ -35,7 +35,7 @@ const GetStartedModal = ({
   const [isTempNumber, setIsTempNumber] = useState(false)
   const [isZipCodeValid, setIsZipCodeValid] = useState(false)
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const isTempNumber = !isNaN(parseFloat(e.target.value))
     setIsTempNumber(isTempNumber)
 
@@ -48,7 +48,7 @@ const GetStartedModal = ({
 
   const forreal = usZips.find(obj => obj.zipCode === zipCode)
 
-  const handleZipCodeChange = (e) => {
+  const handleZipCodeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setZipCode(e.target.value)
     setIsZipCodeValid(!isNaN(parseInt(e.target.value)))
 
