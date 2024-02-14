@@ -20,7 +20,6 @@ const WeatherPage = () => {
     return <h1 className="pb-2 text-4xl font-bold text-gray-50">Error fetching weather. Please try again.</h1>
   }
 
-  // Extract and convert temperature from Kelvin to Fahrenheit
   const kelvinTemp = data?.current?.temp
   const fahrenheitTemp = Math.round((kelvinTemp - 273.15) * 1.8 + 32)
 

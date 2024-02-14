@@ -6,14 +6,9 @@ import GetStartedModal from 'components/GetStartedModal'
 
 const WelcomePage = () => {
   const [open, setOpen] = useState(false)
-  const navigate = useNavigate()
 
   const handleOpenModal = () => {
     setOpen(true)
-  }
-
-  const handleNavigate = () => {
-    navigate('/weather', { replace: true })
   }
 
   return (
@@ -38,7 +33,6 @@ const WelcomePage = () => {
         <GetStartedModal
           open={open}
           handleClose={() => setOpen(false)}
-          handleNavigate={handleNavigate}
         />
       )}
     </div>

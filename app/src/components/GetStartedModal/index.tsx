@@ -7,7 +7,8 @@ import Typography from '@mui/material/Typography'
 import { Stack, TextField } from '@mui/material'
 import { TemperatureContext } from 'components/TemperatureContext'
 import { useContext, useState } from 'react'
-import usZips from 'us-zips'
+import usZips from 'us-zips/array'
+import { NavLink } from 'react-router-dom'
 
 const style = {
   position: 'absolute' as const,
@@ -24,15 +25,13 @@ const style = {
 interface GetStartedModalProps {
   handleClose: () => void
   open: boolean
-  handleNavigate?: () => void
 }
 
 const GetStartedModal = ({
   handleClose,
   open,
-  handleNavigate
 }: GetStartedModalProps) => {
-  const { setPreferredTemperature, setZipCode } = useContext(TemperatureContext)
+  const { setPreferredTemperature, setZipCode, zipCode } = useContext(TemperatureContext)
   const [isTempNumber, setIsTempNumber] = useState(false)
   const [isZipCodeValid, setIsZipCodeValid] = useState(false)
 
@@ -47,11 +46,19 @@ const GetStartedModal = ({
     }
   }
 
+  const forreal = usZips.find(obj => obj.zipCode === zipCode)
+
   const handleZipCodeChange = (e) => {
-    setZipCode(e.target.value.slice(0, 5))
+    setZipCode(e.target.value)
     setIsZipCodeValid(!isNaN(parseInt(e.target.value)))
 
-    if (isZipCodeValid && usZips.includes(parseInt(e.target.value))) {
+    // TODO: Check for valid zip code within usZips
+  
+    // // Check for valid zip code within usZips
+    // const validZip = usZips.find(obj => obj.zip === e.target.value)
+    // console.log(zipCode)
+  
+    if (isZipCodeValid) {
       e.target.style.backgroundColor = 'white'
     } else {
       e.target.style.backgroundColor = '#ffcccc'
@@ -65,13 +72,7 @@ const GetStartedModal = ({
     const enteredTemperature = parseFloat(textInput?.value)
     setPreferredTemperature(enteredTemperature)
     setIsTempNumber(false)
-
-    setTimeout(() => {
-      handleClose()
-      if (handleNavigate) {
-        handleNavigate()
-      }
-    }, 50)
+    handleClose()
   }
   return (
     <Modal
@@ -122,7 +123,9 @@ const GetStartedModal = ({
             onClick={handleTemperatureSubmit}
             disabled={!isTempNumber || !isZipCodeValid}
           >
-            Save Preference
+            <NavLink to="/weather" style={{ textDecoration: 'none' }}>
+              Save Preference
+            </NavLink>
           </Button>
         </Stack>
       </Fade>
