@@ -1,32 +1,23 @@
 import { render, screen } from '@testing-library/react'
+import userEvent from '@testing-library/react'
+import { MemoryRouter } from 'react-router-dom'
 
 import App from './App'
+import WelcomePage from './WelcomePage' // Assuming this is the initial page
 
 describe('<App />', () => {
-  it('should render the App', () => {
-    const { container } = render(<App />)
+  it('should render the initial WelcomePage', () => {
+    render(<App />, { wrapper: MemoryRouter })
 
-    expect(
-      screen.getByRole('heading', {
-        name: /Welcome!/i,
-        level: 1
-      })
-    ).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: /welcome to pants or shorts!/i })).toBeInTheDocument()
+  })
 
-    expect(
-      screen.getByText(
-        /This is a boilerplate build with Vite, React 18, TypeScript, Vitest, Testing Library, TailwindCSS 3, Eslint and Prettier./i
-      )
-    ).toBeInTheDocument()
+  it('should navigate to WeatherPage on clicking "Get Started"', () => {
+    render(<App />, { wrapper: MemoryRouter })
 
-    expect(
-      screen.getByRole('link', {
-        name: /start building for free/i
-      })
-    ).toBeInTheDocument()
+    const getStartedButton = screen.getByRole('button', { name: /get started/i })
+    userEvent.click(getStartedButton)
 
-    expect(screen.getByRole('img')).toBeInTheDocument()
-
-    expect(container.firstChild).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: /weather page/i })).toBeInTheDocument()
   })
 })
