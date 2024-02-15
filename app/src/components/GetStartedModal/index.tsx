@@ -94,7 +94,7 @@ const GetStartedModal = ({
               Temperature Preferences
             </Typography>
             <Typography id="transition-modal-description" sx={{ mb: 2 }}>
-              At what minimum temperature do you prefer to wear shorts?
+              At what minimum temperature (°F) do you prefer to wear shorts?
             </Typography>
             <TextField
               id="temperature-input"
