@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Button from '@mui/material/Button'
-import logo from '../../../public/logo.png'
 import GetStartedModal from 'components/GetStartedModal'
+import logo from 'assets/logo.png'
 
 const WelcomePage = () => {
   const [open, setOpen] = useState(false)
