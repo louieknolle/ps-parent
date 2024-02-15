@@ -8,7 +8,7 @@ import { Stack, TextField } from '@mui/material'
 import { TemperatureContext } from 'components/TemperatureContext'
 import { useContext, useState } from 'react'
 import usZips from 'us-zips/array'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 
 const style = {
   position: 'absolute' as const,
@@ -31,6 +31,7 @@ const GetStartedModal = ({
   open,
 }: GetStartedModalProps) => {
   const { setPreferredTemperature, setZipCode, zipCode } = useContext(TemperatureContext)
+  const navigate = useNavigate()
   const [isTempNumber, setIsTempNumber] = useState(false)
   const [isZipCodeValid, setIsZipCodeValid] = useState(false)
 
@@ -44,8 +45,6 @@ const GetStartedModal = ({
       e.target.style.backgroundColor = '#ffcccc'
     }
   }
-
-  const forreal = usZips.find(obj => obj.zipCode === zipCode)
 
   const handleZipCodeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setZipCode(e.target.value)
@@ -71,6 +70,7 @@ const GetStartedModal = ({
     const enteredTemperature = parseFloat(textInput?.value)
     setPreferredTemperature(enteredTemperature)
     setIsTempNumber(false)
+    navigate('/weather')
     handleClose()
   }
   return (
@@ -121,10 +121,13 @@ const GetStartedModal = ({
           <Button
             onClick={handleTemperatureSubmit}
             disabled={!isTempNumber || !isZipCodeValid}
+            onKeyDown={(event) => {
+              if (event.key === 'Enter' && document.activeElement === event.target) {
+                handleTemperatureSubmit();
+              }
+            }}
           >
-            <NavLink to="/weather" style={{ textDecoration: 'none' }}>
-              Save Preference
-            </NavLink>
+            Save Preference
           </Button>
         </Stack>
       </Fade>
