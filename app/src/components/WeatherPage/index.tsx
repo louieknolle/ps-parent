@@ -26,7 +26,7 @@ const WeatherPage = () => {
   const decision = fahrenheitTemp >= preferredTemperature ? 'shorts' : 'pants'
 
   return (
-    <div className="flex h-screen flex-col items-center justify-center rounded-lg p-8">
+    <div className="flex h-full flex-col items-center justify-center rounded-lg p-8">
       <div style={{ fontFamily: 'Roboto, sans-serif' }} className="text-center">
         <h1 className="pb-2 text-4xl font-bold text-gray-50">
           {`It is currently ${fahrenheitTemp}°F.`}
