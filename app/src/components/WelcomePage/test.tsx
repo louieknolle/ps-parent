@@ -1,7 +1,7 @@
 import { render, screen, fireEvent } from '@testing-library/react'
 import userEvent from '@testing-library/react'
 import WelcomePage from './index'
-import GetStartedModal from 'components/GetStartedModal'
+import GetStartedModal from 'components/GetStartedDialog'
 import { vi } from 'vitest'
 
 

@@ -19,7 +19,7 @@ const WeatherPage = () => {
   } else if (error) {
     return (
       <Box className="flex h-full items-center justify-center">
-        <h1 className="pb-2 text-4xl font-bold text-gray-50 text-center">Error fetching weather. Please try again.</h1>
+        <h1 className="pb-2 text-3xl lg:text-4xl font-bold text-gray-50 text-center">Error fetching weather. Please try again.</h1>
       </Box>
     )
   }
@@ -32,10 +32,10 @@ const WeatherPage = () => {
   return (
     <div className="flex h-full flex-col items-center justify-center rounded-lg p-8">
       <div style={{ fontFamily: 'Roboto, sans-serif' }} className="text-center">
-        <h1 className="pb-2 text-4xl font-bold text-gray-50">
+        <h1 className="pb-2 text-3xl lg:text-4xl font-bold text-gray-50">
           {`It is currently ${fahrenheitTemp}°F.`}
         </h1>
-        <p className="text-2xl font-light text-gray-200">
+        <p className="text-xl lg:text-2xl font-light text-gray-200">
           {`Based on your preferences, we recommend you wear ${decision} today.`}
         </p>
       </div>
