@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
 import Button from '@mui/material/Button'
 import GetStartedDialog from 'components/GetStartedDialog'
 import logo from 'assets/logo.png'

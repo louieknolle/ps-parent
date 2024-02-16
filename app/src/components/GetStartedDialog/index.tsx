@@ -22,27 +22,30 @@ const GetStartedDialog: React.FC<GetStartedDialogProps> = ({
   handleClose,
   open,
 }) => {
-  const { setPreferredTemperature, setZipCode, zipCode } = useContext(
+  const { setPreferredTemperature, preferredTemperature, setZipCode, zipCode } = useContext(
     TemperatureContext
   )
   const navigate = useNavigate()
-  const [isTempNumber, setIsTempNumber] = useState(false)
-  const [isZipCodeValid, setIsZipCodeValid] = useState(false)
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const isTempNumber = !isNaN(parseFloat(e.target.value))
-    setIsTempNumber(isTempNumber)
+  const tempInput = document.querySelector('#temperature-input')
+  const zipInput = document.querySelector('#zip-code-input')
+  
+  
 
-    if (isTempNumber) {
+  const handleTemperatureChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const isValidNumber = !isNaN(parseFloat(e.target.value))
+
+    if (isValidNumber) {
       e.target.style.backgroundColor = 'white'
     } else {
       e.target.style.backgroundColor = '#ffcccc'
     }
+
+    setPreferredTemperature(parseFloat(e.target.value))
   }
 
   const handleZipCodeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setZipCode(e.target.value)
-    setIsZipCodeValid(!isNaN(parseInt(e.target.value)))
+    const isValidNumber= !isNaN(parseInt(e.target.value))
 
     // TODO: Check for valid zip code within usZips
 
@@ -50,23 +53,20 @@ const GetStartedDialog: React.FC<GetStartedDialogProps> = ({
     // const validZip = usZips.find(obj => obj.zip === e.target.value)
     // console.log(zipCode)
 
-    if (isZipCodeValid) {
+    if (isValidNumber) {
       e.target.style.backgroundColor = 'white'
     } else {
       e.target.style.backgroundColor = '#ffcccc'
     }
+    setZipCode(e.target.value)
   }
 
   const handleTemperatureSubmit = () => {
-    const textInput = document.getElementById(
-      'temperature-input'
-    ) as HTMLInputElement
-    const enteredTemperature = parseFloat(textInput?.value)
-    setPreferredTemperature(enteredTemperature)
-    setIsTempNumber(false)
     navigate('/weather')
     handleClose()
   }
+
+  console.log(tempInput, zipInput)
 
   return (
     <Dialog
@@ -98,7 +98,7 @@ const GetStartedDialog: React.FC<GetStartedDialogProps> = ({
           id='temperature-input'
           label='Temperature'
           type='number'
-          onChange={handleInputChange}
+          onChange={handleTemperatureChange}
           required
         />
         <DialogContentText id='get-started-dialog-description' sx={{ mb: 2 }}>
@@ -119,7 +119,7 @@ const GetStartedDialog: React.FC<GetStartedDialogProps> = ({
       <DialogActions>
         <Button
           onClick={handleTemperatureSubmit}
-          disabled={!isTempNumber || !isZipCodeValid}
+          disabled={!preferredTemperature || !zipCode}
         >
           Save Preferences
         </Button>
