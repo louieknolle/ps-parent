@@ -12,12 +12,16 @@ const WeatherPage = () => {
 
   if (loading) {
     return (
-      <Box className="flex h-screen items-center justify-center">
+      <Box className="flex h-full items-center justify-center">
         <CircularProgress />
       </Box>
     )
   } else if (error) {
-    return <h1 className="pb-2 text-4xl font-bold text-gray-50">Error fetching weather. Please try again.</h1>
+    return (
+      <Box className="flex h-full items-center justify-center">
+        <h1 className="pb-2 text-4xl font-bold text-gray-50 text-center">Error fetching weather. Please try again.</h1>
+      </Box>
+    )
   }
 
   const kelvinTemp = data?.current?.temp

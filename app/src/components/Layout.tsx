@@ -5,7 +5,7 @@ import Footer from './Footer'
 
 const Layout = () => {
   return (
-    <div className="app h-screen bg-gradient-to-r from-sky-500 to-indigo-500 pt-8 lg:pt-16 flex justify-center">
+    <div className="app h-screen w-screen bg-gradient-to-r from-sky-500 to-indigo-500 pt-8 lg:pt-16 flex justify-center">
       <nav className="">
         <HomeButton />
       </nav>

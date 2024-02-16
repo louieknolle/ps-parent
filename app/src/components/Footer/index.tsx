@@ -1,11 +1,9 @@
-import GitHubIcon from '@mui/icons-material/GitHub';
-import React from 'react'
-import { NavLink } from 'react-router-dom'
-import { githubUrl } from 'assets/constants';
+import GitHubIcon from '@mui/icons-material/GitHub'
+import { githubUrl } from 'assets/constants'
 
 const Footer = () => {
   return (
-    <footer className="flex items-center justify-evenly p-8 w-96 text-white absolute bottom-0 right-10">
+    <footer className="flex items-center justify-evenly p-2 w-96 text-white absolute bottom-0">
       <a href={githubUrl} target='_blank'>
         <GitHubIcon />
       </a>
