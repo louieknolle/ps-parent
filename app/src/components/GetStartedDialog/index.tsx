@@ -6,31 +6,29 @@ import DialogContentText from '@mui/material/DialogContentText'
 import DialogActions from '@mui/material/DialogActions'
 import Button from '@mui/material/Button'
 import TextField from '@mui/material/TextField'
-import { IconButton, Stack} from '@mui/material'
+import { IconButton, Stack } from '@mui/material'
 import { TemperatureContext } from 'components/TemperatureContext'
 import CloseIcon from '@mui/icons-material/Close'
 import { useContext, useState } from 'react'
 import usZips from 'us-zips/array'
 import { useNavigate } from 'react-router-dom'
 
-interface GetStartedDialogProps {
-  handleClose: () => void
-  open: boolean
-}
+const GetStartedDialog = () => {
+  const [open, setOpen] = useState(false)
 
-const GetStartedDialog: React.FC<GetStartedDialogProps> = ({
-  handleClose,
-  open,
-}) => {
-  const { setPreferredTemperature, preferredTemperature, setZipCode, zipCode } = useContext(
-    TemperatureContext
-  )
+  const handleOpenModal = () => {
+    setOpen(true)
+  }
+  const handleClose = () => {
+    setOpen(false)
+  }
+
+  const { setPreferredTemperature, preferredTemperature, setZipCode, zipCode } =
+    useContext(TemperatureContext)
   const navigate = useNavigate()
 
   const tempInput = document.querySelector('#temperature-input')
   const zipInput = document.querySelector('#zip-code-input')
-  
-  
 
   const handleTemperatureChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const isValidNumber = !isNaN(parseFloat(e.target.value))
@@ -45,7 +43,7 @@ const GetStartedDialog: React.FC<GetStartedDialogProps> = ({
   }
 
   const handleZipCodeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const isValidNumber= !isNaN(parseInt(e.target.value))
+    const isValidNumber = !isNaN(parseInt(e.target.value))
 
     // TODO: Check for valid zip code within usZips
 
@@ -66,65 +64,75 @@ const GetStartedDialog: React.FC<GetStartedDialogProps> = ({
     handleClose()
   }
 
-  console.log(tempInput, zipInput)
-
   return (
-    <Dialog
-      open={open}
-      onClose={handleClose}
-      aria-labelledby='get-started-dialog-title'
-      aria-describedby='get-started-dialog-description'
-    >
-      <DialogTitle id='get-started-dialog-title'>Personal Preferences</DialogTitle>
-      <IconButton
-        aria-label="close"
-        onClick={handleClose}
-        sx={{
-          position: 'absolute',
-          right: 8,
-          top: 8,
-          color: (theme) => theme.palette.grey[500],
-        }}
-      >
-          <CloseIcon />
-      </IconButton>
-      <DialogContent className='flex justify-center'>
-        <Stack spacing={2} className='w-4/5'justifyContent='center'>
-        <DialogContentText id='get-started-dialog-description'>
-          At what minimum temperature (°F) do you prefer to wear shorts? (Sorry, we
-          only support US locations at the moment.)
-        </DialogContentText>
-        <TextField
-          id='temperature-input'
-          label='Temperature'
-          type='number'
-          onChange={handleTemperatureChange}
-          required
-        />
-        <DialogContentText id='get-started-dialog-description' sx={{ mb: 2 }}>
-          What is your location's zip code?
-        </DialogContentText>
-        <TextField
-          id='zip-code-input'
-          label='Zip Code'
-          type='number'
-          onChange={handleZipCodeChange}
-          required
-          inputProps={{
-            maxLength: 5,
-          }}
-        />
-      </Stack>
-      </DialogContent>
-      <DialogActions>
-        <Button
-          onClick={handleTemperatureSubmit}
-          disabled={!preferredTemperature || !zipCode}
+    <>
+      <Button variant="contained" color="secondary" onClick={handleOpenModal}>
+        Get Started
+      </Button>
+      {open && (
+        <Dialog
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="get-started-dialog-title"
+          aria-describedby="get-started-dialog-description"
         >
-          Save Preferences
-        </Button>
-      </DialogActions>
-    </Dialog>
+          <DialogTitle id="get-started-dialog-title">
+            Personal Preferences
+          </DialogTitle>
+          <IconButton
+            aria-label="close"
+            onClick={handleClose}
+            sx={{
+              position: 'absolute',
+              right: 8,
+              top: 8,
+              color: (theme) => theme.palette.grey[500]
+            }}
+          >
+            <CloseIcon />
+          </IconButton>
+          <DialogContent className="flex justify-center">
+            <Stack spacing={2} className="w-4/5" justifyContent="center">
+              <DialogContentText id="get-started-dialog-description">
+                At what minimum temperature (°F) do you prefer to wear shorts?
+                (Sorry, we only support US locations at the moment.)
+              </DialogContentText>
+              <TextField
+                id="temperature-input"
+                label="Temperature"
+                type="number"
+                onChange={handleTemperatureChange}
+                required
+              />
+              <DialogContentText
+                id="get-started-dialog-description"
+                sx={{ mb: 2 }}
+              >
+                What is your location's zip code?
+              </DialogContentText>
+              <TextField
+                id="zip-code-input"
+                label="Zip Code"
+                type="number"
+                onChange={handleZipCodeChange}
+                required
+                inputProps={{
+                  maxLength: 5
+                }}
+              />
+            </Stack>
+          </DialogContent>
+          <DialogActions>
+            <Button
+              onClick={handleTemperatureSubmit}
+              disabled={!preferredTemperature || !zipCode}
+            >
+              Save Preferences
+            </Button>
+          </DialogActions>
+        </Dialog>
+      )}
+    </>
   )
 }
 
