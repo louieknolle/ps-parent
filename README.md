@@ -29,3 +29,5 @@ Pants or Shorts takes the guesswork out of getting dressed, recommending the per
 
 MIT License
 
+N.B. if cloned and ran locally needs to have a .env file with your own [OpenWeatherAPI](https://openweathermap.org/api) in the root directory with the following format:
+```VITE_WEATHER_API_KEY=<yourAPIKey>```
