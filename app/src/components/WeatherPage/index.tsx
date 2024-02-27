@@ -30,7 +30,7 @@ const WeatherPage = () => {
   const decision = fahrenheitTemp >= preferredTemperature ? 'shorts' : 'pants'
 
   return (
-    <div className="flex h-full flex-col items-center justify-center rounded-lg p-8">
+    <div className="flex h-full flex-col rounded-lg p-2 space-y-2">
       <div style={{ fontFamily: 'Roboto, sans-serif' }} className="text-center">
         <h1 className="pb-2 text-3xl lg:text-4xl font-bold text-gray-50">
           {`It is currently ${fahrenheitTemp}°F.`}
@@ -41,7 +41,7 @@ const WeatherPage = () => {
       </div>
       <img
         src={decision === 'shorts' ? shortsImage : pantsImage}
-        alt={decision}
+        alt={`cartoon ${decision}`}
         className="mx-auto mt-4 w-1/2 rounded-full"
       />
     </div>

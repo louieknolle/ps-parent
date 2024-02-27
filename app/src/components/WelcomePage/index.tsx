@@ -16,7 +16,7 @@ const WelcomePage = () => {
       </p>
       <GetStartedDialog />
       <div className="flex justify-center align-top">
-        <img src={logo} alt="Logo" className="w-1/2 lg:w-1/2" />
+        <img src={logo} alt="orange cartoon pants with rays of sunlight shining behind and two white clouds on either side" className="w-1/2 lg:w-1/2" />
       </div>
     </div>
   )
