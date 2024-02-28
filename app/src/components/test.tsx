@@ -7,7 +7,7 @@ import WelcomePage from './WelcomePage' // Assuming this is the initial page
 
 describe('<App />', () => {
   it('should render the initial WelcomePage', () => {
-    render(<App />, { wrapper: MemoryRouter })
+    render(<App />)
 
     expect(screen.getByRole('heading', { name: /welcome to pants or shorts!/i })).toBeInTheDocument()
   })

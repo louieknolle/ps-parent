@@ -3,7 +3,7 @@ import { githubUrl } from 'assets/constants'
 
 const Footer = () => {
   return (
-    <footer className="flex items-center justify-evenly p-2 w-96 text-white absolute bottom-0">
+    <footer className="flex items-center justify-evenly p-2 pb-8 w-96 text-white absolute bottom-0">
       <a href={githubUrl} target='_blank'>
         <GitHubIcon />
       </a>

@@ -11,9 +11,13 @@ import { TemperatureContext } from 'components/TemperatureContext'
 import CloseIcon from '@mui/icons-material/Close'
 import { useContext, useState } from 'react'
 import usZips from 'us-zips/array'
-import { useNavigate } from 'react-router-dom'
+import { NavigateFunction, useNavigate } from 'react-router-dom'
 
-const GetStartedDialog = () => {
+interface GetStartedDialogProps {
+  navigate: NavigateFunction
+}
+
+const GetStartedDialog = ({navigate}: GetStartedDialogProps) => {
   const [open, setOpen] = useState(false)
 
   const handleOpenModal = () => {
@@ -25,7 +29,6 @@ const GetStartedDialog = () => {
 
   const { setPreferredTemperature, preferredTemperature, setZipCode, zipCode } =
     useContext(TemperatureContext)
-  const navigate = useNavigate()
 
   const tempInput = document.querySelector('#temperature-input')
   const zipInput = document.querySelector('#zip-code-input')
@@ -66,7 +69,7 @@ const GetStartedDialog = () => {
 
   return (
     <>
-      <Button variant="contained" color="secondary" onClick={handleOpenModal}>
+      <Button variant="contained" color="secondary" onClick={handleOpenModal} role='button' name='Get Started'>
         Get Started
       </Button>
       {open && (
@@ -80,6 +83,8 @@ const GetStartedDialog = () => {
             Personal Preferences
           </DialogTitle>
           <IconButton
+            name='close'
+            role='button'
             aria-label="close"
             onClick={handleClose}
             sx={{
@@ -126,6 +131,8 @@ const GetStartedDialog = () => {
             <Button
               onClick={handleTemperatureSubmit}
               disabled={!preferredTemperature || !zipCode}
+              role='button'
+              name='Save Preferences'
             >
               Save Preferences
             </Button>
